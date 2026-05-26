@@ -1,241 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Our Space 🤍</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Courier+Prime&family=Lora:ital@1&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
-            background-attachment: fixed;
-            color: #fff;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-            margin-top: 10px;
-        }
-
-        .header h1 { font-size: 28px; font-weight: 600; }
-        .section-title { font-size: 16px; font-weight: 500; margin-bottom: 15px; opacity: 0.9; }
-
-        /* Status Cards */
-        .status-container { display: flex; gap: 15px; }
-        .person-card { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 15px 10px; cursor: pointer; transition: transform 0.2s;}
-        .person-card:active { transform: scale(0.95); }
-        .avatar { width: 60px; height: 60px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; position: relative; margin-bottom: 8px;}
-        .status-dot { width: 14px; height: 14px; border-radius: 50%; position: absolute; bottom: 2px; right: 2px; border: 2px solid #a18cd1; transition: all 0.3s;}
-        
-        .dot-free { background-color: #00e676; box-shadow: 0 0 10px #00e676; }
-        .dot-busy { background-color: #ff5252; box-shadow: 0 0 10px #ff5252; }
-        
-        .person-card h3 { font-size: 14px; }
-        .status-text { font-size: 11px; opacity: 0.8; background: rgba(0,0,0,0.1); padding: 4px 8px; border-radius: 12px; margin-top: 5px; }
-
-        /* Rich Text Editor */
-        .editor-container { display: flex; flex-direction: column; gap: 10px; }
-        .toolbar { display: flex; flex-wrap: wrap; gap: 8px; background: rgba(255, 255, 255, 0.2); padding: 10px; border-radius: 15px; justify-content: center; }
-        
-        .toolbar button, .toolbar select, .toolbar input[type="color"] {
-            background: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255,255,255,0.4);
-            color: #333;
-            border-radius: 8px;
-            padding: 5px 10px;
-            font-size: 14px;
-            cursor: pointer;
-            outline: none;
-            backdrop-filter: blur(5px);
-        }
-
-        .toolbar button:active { background: rgba(255, 255, 255, 0.5); }
-        .toolbar button { font-weight: bold; }
-        .toolbar input[type="color"] { padding: 0; width: 30px; height: 30px; border-radius: 50%; overflow: hidden; cursor: pointer; border: none; }
-        .toolbar input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
-        .toolbar input[type="color"]::-webkit-color-swatch { border: none; border-radius: 50%; }
-
-        .editor-area {
-            min-height: 200px;
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255,255,255,0.5);
-            border-radius: 15px;
-            padding: 15px;
-            color: #333;
-            font-size: 16px;
-            outline: none;
-            overflow-y: auto;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .editor-area:empty:before {
-            content: attr(data-placeholder);
-            color: rgba(0,0,0,0.4);
-            pointer-events: none;
-            display: block;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="header">
-        <h1>Our Space 🤍</h1>
-        <p>Always making time for you.</p>
-    </div>
-
-    <div class="status-container glass-panel">
-        <div class="person-card" id="bhumikaaCard">
-            <div class="avatar">
-                👩🏻
-                <div class="status-dot dot-busy" id="herDot"></div>
-            </div>
-            <h3>Bhumikaa</h3>
-            <span class="status-text" id="herStatus">Busy</span>
-        </div>
-
-        <div class="person-card" id="siddharthCard" onclick="toggleMyStatus()">
-            <div class="avatar">
-                🧑🏻
-                <div class="status-dot dot-free" id="myDot"></div>
-            </div>
-            <h3>Siddharth</h3>
-            <span class="status-text" id="myStatus">Free to Talk</span>
-        </div>
-    </div>
-
-    <div class="glass-panel">
-        <h2 class="section-title">Our Canvas 🎨</h2>
-        <div class="editor-container">
-            <div class="toolbar">
-                <button onclick="formatDoc('bold')" title="Bold">B</button>
-                <button onclick="formatDoc('italic')" style="font-style: italic;" title="Italic">I</button>
-                <button onclick="formatDoc('underline')" style="text-decoration: underline;" title="Underline">U</button>
-                
-                <select onchange="formatDoc('fontName', this.value)">
-                    <option value="Poppins">Normal</option>
-                    <option value="Caveat">Handwriting</option>
-                    <option value="Courier Prime">Typewriter</option>
-                    <option value="Lora">Elegant</option>
-                </select>
-
-                <select onchange="formatDoc('fontSize', this.value)">
-                    <option value="3">Normal</option>
-                    <option value="5">Large</option>
-                    <option value="7">Huge</option>
-                </select>
-
-                <input type="color" onchange="formatDoc('foreColor', this.value)" title="Text Color" value="#333333">
-            </div>
-
-            <div class="editor-area" id="sharedNote" contenteditable="true" data-placeholder="Leave a sweet note here..."></div>
-        </div>
-    </div>
-
-    <script type="module">
-        // 1. Import Firebase from CDN
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
-
-        // 2. Your Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyB0IsG5o9GOw2fcVYPd_6BOSCW1_oR9bFo",
-            authDomain: "our-space-bd056.firebaseapp.com",
-            databaseURL: "https://our-space-bd056-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "our-space-bd056",
-            storageBucket: "our-space-bd056.firebasestorage.app",
-            messagingSenderId: "122516044315",
-            appId: "1:122516044315:web:e5affdcde5d82261add6be",
-            measurementId: "G-QX6VG2545K"
-        };
-
-        // 3. Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-
-        // ==========================================
-        // FEATURE 1: LIVE TEXT EDITOR SYNC
-        // ==========================================
-        const noteRef = ref(db, 'sharedData/note');
-        const editor = document.getElementById('sharedNote');
-
-        // Listen for changes from the database (When she types)
-        onValue(noteRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data !== null && editor.innerHTML !== data) {
-                editor.innerHTML = data;
-            }
-        });
-
-        // Send changes to the database (When you type)
-        editor.addEventListener('input', () => {
-            set(noteRef, editor.innerHTML);
-        });
-
-        // ==========================================
-        // FEATURE 2: LIVE STATUS SYNC
-        // ==========================================
-        let isFree = true;
-        const myStatusRef = ref(db, 'sharedData/siddharthStatus');
-        
-        // Make the toggle function globally available to the HTML button
-        window.toggleMyStatus = function() {
-            isFree = !isFree;
-            set(myStatusRef, isFree); // Send to database
-        }
-
-        // Listen for YOUR status changes in the database
-        onValue(myStatusRef, (snapshot) => {
-            const status = snapshot.val();
-            if (status !== null) {
-                isFree = status;
-                const myDot = document.getElementById('myDot');
-                const myStatus = document.getElementById('myStatus');
-                
-                if (isFree) {
-                    myDot.className = 'status-dot dot-free';
-                    myStatus.textContent = 'Free to Talk';
-                } else {
-                    myDot.className = 'status-dot dot-busy';
-                    myStatus.textContent = 'Busy';
-                }
-            }
-        });
-
-        // Make the text formatting tool globally available
-        window.formatDoc = function(command, value = null) {
-            document.execCommand(command, false, value);
-            editor.focus();
-            // Trigger the input event so Firebase catches the style change
-            editor.dispatchEvent(new Event('input')); 
-        }
-    </script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -259,10 +21,12 @@
             background-attachment: fixed;
             color: #fff;
             min-height: 100vh;
-            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
         }
 
-        /* Login Screen Overlay */
+        /* --- Login Screen --- */
         #loginScreen {
             position: fixed;
             inset: 0;
@@ -286,6 +50,7 @@
             margin: 10px;
             font-weight: 500;
             transition: 0.2s;
+            width: 250px;
         }
 
         .login-btn:active {
@@ -293,72 +58,197 @@
             background: rgba(255, 255, 255, 0.5);
         }
 
-        .glass-panel {
+        .login-header h1 { font-size: 36px; font-weight: 600; text-align: center; margin-bottom: 10px; }
+        .login-header p { text-align: center; margin-bottom: 30px; font-size: 18px; opacity: 0.9; }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            height: 70px;
+        }
+
+        .navbar-brand {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 5px 15px 5px 5px;
+            border-radius: 30px;
+        }
+
+        .nav-avatar {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .nav-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* --- Main Content Area (Responsive Grid) --- */
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr; /* Default portrait/mobile: 1 column */
+            gap: 20px;
+            padding: 20px;
+            flex-grow: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Switch to 2 columns on larger screens or landscape orientation */
+        @media (min-width: 800px) and (orientation: landscape) {
+            .main-container {
+                grid-template-columns: 1fr 1.5fr; /* Partner card takes less space than canvas */
+                height: calc(100vh - 70px);
+                padding: 30px;
+            }
+        }
+
+        /* --- Glass Cards --- */
+        .glass-card {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 24px;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
         }
 
-        .header { text-align: center; margin-bottom: 25px; margin-top: 10px; }
-        .header h1 { font-size: 28px; font-weight: 600; }
-        .section-title { font-size: 16px; font-weight: 500; margin-bottom: 15px; opacity: 0.9; }
+        .section-title { 
+            font-size: 18px; 
+            font-weight: 600; 
+            margin-bottom: 20px; 
+            opacity: 0.9; 
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 10px;
+            text-align: center;
+        }
 
-        /* Status Cards */
-        .status-container { display: flex; justify-content: center; }
-        .person-card { display: flex; flex-direction: column; align-items: center; padding: 15px; }
-        .avatar { width: 80px; height: 80px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 40px; position: relative; margin-bottom: 10px;}
-        .status-dot { width: 18px; height: 18px; border-radius: 50%; position: absolute; bottom: 2px; right: 2px; border: 3px solid #a18cd1; transition: all 0.3s;}
+        /* --- Partner Status Card --- */
+        .partner-card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .avatar-large { 
+            width: 120px; 
+            height: 120px; 
+            background: rgba(255, 255, 255, 0.2); 
+            border-radius: 50%; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            font-size: 60px; 
+            position: relative; 
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .status-dot-large { 
+            width: 24px; 
+            height: 24px; 
+            border-radius: 50%; 
+            position: absolute; 
+            bottom: 5px; 
+            right: 5px; 
+            border: 4px solid #b8a4df; 
+            transition: all 0.3s;
+        }
         
-        .dot-free { background-color: #00e676; box-shadow: 0 0 10px #00e676; }
-        .dot-busy { background-color: #ff5252; box-shadow: 0 0 10px #ff5252; }
+        .dot-free { background-color: #00e676; box-shadow: 0 0 15px #00e676; }
+        .dot-busy { background-color: #ff5252; box-shadow: 0 0 15px #ff5252; }
         
-        .person-card h3 { font-size: 18px; }
-        .status-text { font-size: 13px; opacity: 0.9; background: rgba(0,0,0,0.2); padding: 5px 12px; border-radius: 12px; margin-top: 5px; }
+        .partner-card-content h3 { font-size: 24px; margin-bottom: 5px; }
+        .status-text { font-size: 15px; background: rgba(0,0,0,0.2); padding: 8px 16px; border-radius: 20px; margin-bottom: 30px; letter-spacing: 0.5px;}
 
         .my-status-toggle {
-            display: block;
             width: 100%;
             background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.5);
             color: white;
-            padding: 10px;
+            padding: 15px;
             border-radius: 12px;
-            margin-top: 15px;
-            font-size: 14px;
+            font-size: 16px;
             cursor: pointer;
             font-weight: 600;
+            transition: 0.3s;
+            margin-top: auto;
         }
 
-        /* Rich Text Editor */
-        .editor-container { display: flex; flex-direction: column; gap: 10px; }
-        .toolbar { display: flex; flex-wrap: wrap; gap: 8px; background: rgba(255, 255, 255, 0.2); padding: 10px; border-radius: 15px; justify-content: center; }
+        .my-status-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* --- Canvas Card --- */
+        .canvas-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .toolbar { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 8px; 
+            background: rgba(255, 255, 255, 0.2); 
+            padding: 12px; 
+            border-radius: 15px; 
+            justify-content: center; 
+            margin-bottom: 15px;
+        }
         
         .toolbar button, .toolbar select, .toolbar input[type="color"] {
             background: rgba(255, 255, 255, 0.3);
             border: 1px solid rgba(255,255,255,0.4);
             color: #333;
             border-radius: 8px;
-            padding: 5px 10px;
+            padding: 8px 12px;
             font-size: 14px;
             cursor: pointer;
             outline: none;
             backdrop-filter: blur(5px);
+            transition: 0.2s;
         }
 
+        .toolbar button:hover, .toolbar select:hover { background: rgba(255, 255, 255, 0.5); }
         .toolbar button { font-weight: bold; }
-        .toolbar input[type="color"] { padding: 0; width: 30px; height: 30px; border-radius: 50%; overflow: hidden; cursor: pointer; border: none; }
+        .toolbar input[type="color"] { padding: 0; width: 36px; height: 36px; border-radius: 50%; overflow: hidden; border: none; }
         
         .editor-area {
-            min-height: 200px;
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255,255,255,0.5);
+            flex-grow: 1;
+            min-height: 250px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255,255,255,0.6);
             border-radius: 15px;
-            padding: 15px;
+            padding: 20px;
             color: #333;
             font-size: 16px;
             outline: none;
@@ -376,48 +266,47 @@
 </head>
 <body>
 
-    <!-- LOGIN SCREEN -->
     <div id="loginScreen">
-        <div class="header">
+        <div class="login-header">
             <h1>Our Space 🤍</h1>
-            <p style="margin-bottom: 20px;">Who is logging in?</p>
+            <p>Who is logging in?</p>
         </div>
         <button class="login-btn" onclick="loginUser('siddharth')">🧑🏻 I am Siddharth</button>
         <button class="login-btn" onclick="loginUser('bhumikaa')">👩🏻 I am Bhumikaa</button>
     </div>
 
-    <!-- MAIN APP CONTENT (Hidden until login) -->
-    <div id="mainApp" style="display: none;">
-        <div class="header">
-            <h1>Our Space 🤍</h1>
-            <p>Always making time for you.</p>
-        </div>
+    <div id="mainApp" style="display: none; flex-grow: 1; display: flex; flex-direction: column;">
+        
+        <nav class="navbar">
+            <div class="navbar-brand">Our Space 🤍</div>
+            <div class="nav-profile">
+                <div class="nav-avatar" id="navUserEmoji">🧑🏻</div>
+                <div class="nav-name" id="navUserName">Loading...</div>
+            </div>
+        </nav>
 
-        <div class="glass-panel">
-            <h2 class="section-title" id="partnerTitle">Partner's Status</h2>
+        <div class="main-container">
             
-            <div class="status-container">
-                <!-- Partner Profile Card -->
-                <div class="person-card" id="partnerCard">
-                    <div class="avatar">
+            <div class="glass-card">
+                <h2 class="section-title">Partner's Status</h2>
+                
+                <div class="partner-card-content">
+                    <div class="avatar-large">
                         <span id="partnerEmoji">👩🏻</span>
-                        <div class="status-dot dot-free" id="partnerDot"></div>
+                        <div class="status-dot-large dot-free" id="partnerDot"></div>
                     </div>
                     <h3 id="partnerName">Bhumikaa</h3>
                     <span class="status-text" id="partnerStatusText">Loading...</span>
                 </div>
+
+                <button class="my-status-toggle" id="myStatusBtn" onclick="toggleMyStatus()">
+                    Update My Status
+                </button>
             </div>
 
-            <!-- Button to change YOUR status -->
-            <button class="my-status-toggle" id="myStatusBtn" onclick="toggleMyStatus()">
-                Update My Status
-            </button>
-        </div>
-
-        <div class="glass-panel">
-            <h2 class="section-title">Our Canvas 🎨</h2>
-            <div class="editor-container">
-                <!-- Added onmousedown="event.preventDefault()" to prevent losing text highlight -->
+            <div class="glass-card canvas-card">
+                <h2 class="section-title">Our Canvas 🎨</h2>
+                
                 <div class="toolbar" onmousedown="event.preventDefault()">
                     <button onclick="formatDoc('bold')" title="Bold">B</button>
                     <button onclick="formatDoc('italic')" style="font-style: italic;" title="Italic">I</button>
@@ -441,6 +330,7 @@
 
                 <div class="editor-area" id="sharedNote" contenteditable="true" data-placeholder="Leave a sweet note here..."></div>
             </div>
+
         </div>
     </div>
 
@@ -466,16 +356,23 @@
         let partnerUser = "";
         let myCurrentStatus = true; // true = free, false = busy
 
+        // Ensure mainApp is hidden properly on initial load due to CSS layout conflicts
+        document.getElementById('mainApp').style.display = 'none';
+
         // --- LOGIN LOGIC ---
         window.loginUser = function(user) {
             currentUser = user;
             partnerUser = (user === 'siddharth') ? 'bhumikaa' : 'siddharth';
             
-            // Hide login, show main app
+            // Hide login, show main app as a flex container
             document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('mainApp').style.display = 'block';
+            document.getElementById('mainApp').style.display = 'flex';
 
-            // Setup the UI for the partner's profile
+            // Setup Navigation Bar (Your info)
+            document.getElementById('navUserName').innerText = (currentUser === 'siddharth') ? 'Siddharth' : 'Bhumikaa';
+            document.getElementById('navUserEmoji').innerText = (currentUser === 'siddharth') ? '🧑🏻' : '👩🏻';
+
+            // Setup Partner Card UI (Partner's info)
             document.getElementById('partnerName').innerText = (partnerUser === 'siddharth') ? 'Siddharth' : 'Bhumikaa';
             document.getElementById('partnerEmoji').innerText = (partnerUser === 'siddharth') ? '🧑🏻' : '👩🏻';
             
@@ -485,7 +382,7 @@
 
         // --- DATABASE LOGIC ---
         function setupDatabaseListeners() {
-            // 1. Listen to partner's status to display on the card
+            // 1. Listen to partner's status
             const partnerStatusRef = ref(db, `sharedData/status/${partnerUser}`);
             onValue(partnerStatusRef, (snapshot) => {
                 const isPartnerFree = snapshot.val();
@@ -494,16 +391,16 @@
                     const text = document.getElementById('partnerStatusText');
                     
                     if (isPartnerFree) {
-                        dot.className = 'status-dot dot-free';
+                        dot.className = 'status-dot-large dot-free';
                         text.textContent = 'Free to Talk';
                     } else {
-                        dot.className = 'status-dot dot-busy';
+                        dot.className = 'status-dot-large dot-busy';
                         text.textContent = 'Busy';
                     }
                 }
             });
 
-            // 2. Listen to your OWN status to update your toggle button text
+            // 2. Listen to your OWN status
             const myStatusRef = ref(db, `sharedData/status/${currentUser}`);
             onValue(myStatusRef, (snapshot) => {
                 const status = snapshot.val();
@@ -539,8 +436,6 @@
 
         // --- FONT FIX LOGIC ---
         const editor = document.getElementById('sharedNote');
-        
-        // Force the browser to use CSS styles instead of old HTML tags for fonts
         document.execCommand('styleWithCSS', false, true);
 
         window.formatDoc = function(command, value = null) {
