@@ -22,7 +22,7 @@
             color: #fff;
             height: 100%;
             width: 100%;
-            overflow-x: hidden; /* Fixes horizontal scroll issue */
+            overflow-x: hidden; 
             display: flex;
             flex-direction: column;
         }
@@ -44,7 +44,7 @@
             border: 1px solid rgba(255,255,255,0.5);
             padding: 15px 30px;
             font-size: 18px;
-            border-radius: 30px; /* Rounded button */
+            border-radius: 30px; 
             color: white;
             cursor: pointer;
             backdrop-filter: blur(10px);
@@ -115,7 +115,7 @@
             position: absolute;
             bottom: 0px;
             right: 0px;
-            border: 2px solid #b8a4df; /* Matches navbar tone */
+            border: 2px solid #b8a4df; 
             transition: all 0.3s;
         }
 
@@ -128,13 +128,13 @@
         .main-container {
             display: grid;
             grid-template-columns: 1fr; 
-            gap: 15px; /* Reduced gap for mobile */
-            padding: 15px; /* Reduced padding for mobile */
+            gap: 15px; 
+            padding: 15px; 
             flex-grow: 1;
             max-width: 1400px;
             margin: 0 auto;
             width: 100%;
-            overflow-y: auto; /* Allows scrolling inside the container if needed */
+            overflow-y: auto; 
         }
 
         @media (min-width: 800px) and (orientation: landscape) {
@@ -146,15 +146,25 @@
             }
         }
 
+        /* Column wrapper for left side items */
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        @media (min-width: 800px) {
+            .left-column { gap: 25px; }
+        }
+
         /* --- Glass Cards --- */
         .glass-card {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius:50px; /* More circular */
+            border-radius: 40px; 
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            padding: 20px; /* Reduced padding slightly to save mobile space */
+            padding: 20px; 
             display: flex;
             flex-direction: column;
         }
@@ -180,7 +190,7 @@
         }
 
         .avatar-large { 
-            width: 100px; /* Slightly smaller for mobile */
+            width: 100px; 
             height: 100px; 
             background: rgba(255, 255, 255, 0.2); 
             border-radius: 50%; 
@@ -216,7 +226,7 @@
             border: 1px solid rgba(255,255,255,0.5);
             color: white;
             padding: 14px;
-            border-radius: 50px; /* Matched to card radius */
+            border-radius: 50px; 
             font-size: 15px;
             cursor: pointer;
             font-weight: 600;
@@ -224,9 +234,80 @@
             margin-top: auto;
         }
 
-        .my-status-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
+        .my-status-toggle:hover { background: rgba(255, 255, 255, 0.3); }
+
+        /* --- Music Player Card Styles --- */
+        .album-art {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+            border-radius: 25px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+
+        .song-info { text-align: center; }
+        .song-info h3 { font-size: 20px; font-weight: 600; margin-bottom: 2px; }
+        .song-info p { font-size: 13px; opacity: 0.8; margin-bottom: 15px; }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            width: 35%;
+            height: 100%;
+            background-color: #fff;
+            transition: width 0.1s linear;
+        }
+
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .music-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .btn-control {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s;
+            padding: 0;
+        }
+
+        .btn-control:hover { transform: scale(1.1); }
+
+        .play-btn {
+            background-color: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255,255,255,0.4);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .btn-control svg { width: 24px; height: 24px; fill: currentColor; }
+        .play-btn svg { width: 26px; height: 26px; margin-left: 3px; }
+
 
         /* --- Canvas Card --- */
         .canvas-card {
@@ -237,7 +318,7 @@
         .toolbar { 
             display: flex; 
             flex-wrap: wrap; 
-            gap: 6px; /* Tighter gap for mobile */
+            gap: 6px; 
             background: rgba(255, 255, 255, 0.2); 
             padding: 10px; 
             border-radius: 20px; 
@@ -250,8 +331,8 @@
             border: 1px solid rgba(255,255,255,0.4);
             color: #333;
             border-radius: 8px;
-            padding: 6px 10px; /* Smaller padding */
-            font-size: 13px; /* Smaller font */
+            padding: 6px 10px; 
+            font-size: 13px; 
             cursor: pointer;
             outline: none;
             backdrop-filter: blur(5px);
@@ -271,27 +352,18 @@
             background: transparent;
         }
         
-        .toolbar input[type="color"]::-webkit-color-swatch-wrapper {
-            padding: 0;
-        }
+        .toolbar input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+        .toolbar input[type="color"]::-webkit-color-swatch { border: none; border-radius: 50%; }
+        .toolbar input[type="color"]::-moz-color-swatch { border: none; border-radius: 50%; }        
         
-        .toolbar input[type="color"]::-webkit-color-swatch {
-            border: none;
-            border-radius: 50%;
-        }
-        
-        .toolbar input[type="color"]::-moz-color-swatch {
-            border: none;
-            border-radius: 50%;
-        }        
         .editor-area {
             flex-grow: 1;
             min-height: 200px;
-            background: rgba(255, 255, 255, 0.9); /* Whiter background */
+            background: rgba(255, 255, 255, 0.9); 
             border: 1px solid rgba(255,255,255,0.8);
             border-radius: 20px;
             padding: 15px;
-            color: #555; /* Dimmer text color */
+            color: #555; 
             font-size: 15px;
             outline: none;
             overflow-y: auto;
@@ -304,6 +376,25 @@
             pointer-events: none;
             display: block;
         }
+
+        /* --- Custom Glass Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 8px; 
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.4); 
+            border-radius: 10px; 
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.7); 
+        }
+
     </style>
 </head>
 <body>
@@ -332,21 +423,54 @@
 
         <div class="main-container">
             
-            <div class="glass-card">
-                <h2 class="section-title">Partner's Status</h2>
+            <div class="left-column">
                 
-                <div class="partner-card-content">
-                    <div class="avatar-large">
-                        <span id="partnerEmoji">👩🏻</span>
-                        <div class="status-dot-large dot-free" id="partnerDot"></div>
+                <div class="glass-card">
+                    <h2 class="section-title">Partner's Status</h2>
+                    <div class="partner-card-content">
+                        <div class="avatar-large">
+                            <span id="partnerEmoji">👩🏻</span>
+                            <div class="status-dot-large dot-free" id="partnerDot"></div>
+                        </div>
+                        <h3 id="partnerName">Bhumikaa</h3>
+                        <span class="status-text" id="partnerStatusText">Loading...</span>
                     </div>
-                    <h3 id="partnerName">Bhumikaa</h3>
-                    <span class="status-text" id="partnerStatusText">Loading...</span>
+                    <button class="my-status-toggle" id="myStatusBtn" onclick="toggleMyStatus()">
+                        Update My Status
+                    </button>
                 </div>
 
-                <button class="my-status-toggle" id="myStatusBtn" onclick="toggleMyStatus()">
-                    Update My Status
-                </button>
+                <div class="glass-card">
+                    <h2 class="section-title">Our Playlist 🎵</h2>
+                    
+                    <div class="album-art"></div>
+                    
+                    <div class="song-info">
+                        <h3>The Angel Next Door</h3>
+                        <p>Spoils Me Rotten OP</p>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="time-info">
+                        <span>1:12</span>
+                        <span>3:45</span>
+                    </div>
+
+                    <div class="music-controls">
+                        <button class="btn-control">
+                            <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                        </button>
+                        <button class="btn-control play-btn">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                        <button class="btn-control">
+                            <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                        </button>
+                    </div>
+                </div>
+
             </div>
 
             <div class="glass-card canvas-card">
@@ -486,7 +610,6 @@
         const editor = document.getElementById('sharedNote');
         let savedSelection = null;
 
-        // 1. Save the exact text you highlight whenever you click or type
         function saveSelection() {
             if (window.getSelection) {
                 const sel = window.getSelection();
@@ -500,7 +623,6 @@
         editor.addEventListener('mouseup', saveSelection);
         editor.addEventListener('mouseleave', saveSelection);
 
-        // 2. Restore that highlight right before applying a font or size
         function restoreSelection() {
             if (savedSelection) {
                 if (window.getSelection) {
@@ -512,13 +634,13 @@
         }
 
         window.formatDoc = function(command, value = null) {
-            restoreSelection(); // Bring back the highlighted text
+            restoreSelection(); 
             
             document.execCommand(command, false, value);
             
             editor.focus();
-            saveSelection(); // Save the new state
-            editor.dispatchEvent(new Event('input')); // Tell Firebase to sync
+            saveSelection(); 
+            editor.dispatchEvent(new Event('input')); 
         }
     </script>
 </body>
